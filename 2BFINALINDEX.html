@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="libraries/p5.js"></script>
+    <script src="RAINBOWCaterpillar.js"></script>
+    <script src="doodling.js"></script>
+    <script src="WEBCAMFUN.js"></script>
+
+<style>
+  
+ .overlay-img-no-jiggle {
+    position: absolute;
+    z-index: 1; /* Lower z-index so it's behind other images */
+  }
+
+  .overlay-img {
+    position: absolute;
+    z-index: 2; /* Higher z-index so it's in front of the plate image */
+    animation: jiggle 0.3s infinite;
+    pointer-events: auto; /* Add this line */
+  }
+
+  #peas {
+    z-index: 7;
+  }
+
+  #potatoes {
+    z-index: 9;
+  }
+
+  #chicken {
+    z-index: 8;
+  }
+
+  body#fork-cursor {
+    background-image: url('./tablecloth.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    cursor:url("forkpng.png"), auto;
+  }
+
+  h2 {
+    font-size: 100px;
+    color: rgb(255, 54, 9); /* Use the rgb function for RGB values */
+    font-family: Arial, Helvetica, sans-serif;
+    position: sticky;
+    top: 20px;
+    left: 50px;
+    z-index: 10;
+    text-align: right;
+    animation: fallDown 5s linear infinite;
+  }
+
+  /* Define the animations */
+  @keyframes fallDown {
+    90% { top: 6; }
+    100% { top: 90vh; }
+  }
+
+  @keyframes jiggle {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 15; /* Sit on top */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; /* Full width */
+  height: 80%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(185, 179, 179); /* Fallback color */
+  background-color: rgba(255, 0, 0, 0); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: rgba(99, 163, 188, 0.599); 
+  margin: auto;
+  border: 0px solid #888;
+  width: 75%; /* You can reduce this value */
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+.modal-inner-content {
+  display: none;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  padding: 60px 0px; /* Set right padding to 0 */
+  width: 10%; /* Reduce this value to move scrollbar closer */
+  margin: auto; /* Center the content */
+}
+.close {
+  font-size: 40px; /* Adjust this value to make the exit button bigger or smaller */
+  position: relative; /* Position it relative to the modal-content */
+  top: -50px; /* Adjust this value to move it up or down */
+  left: -35px; /* Adjust this value to move it left or right */
+}
+/* New CSS for the new image */
+#newImage {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+</style>
+</head>
+<body id="fork-cursor">
+<h2>you are welcome to eat </h2>
+
+<!-- Image elements with unique IDs -->
+<img id="plate" src="brightfloralplate.png" class="overlay-img-no-jiggle" alt="plate" style="width:600px;height:600px;">
+<img id="glass" src="glass.png" class="overlay-img" alt="glass" style="width: 550px; height: 700px;">
+<img id="peas" src="peas.png" class="overlay-img" alt="peas" style="width: 150px; height: 150px;">
+<img id="potatoes" src="potatoes.png" class="overlay-img" alt="potatoes" style="width: 220px; height: 220px;">
+<img id="chicken" src="chicken.png" class="overlay-img" alt="chicken" style="width: 240px; height: 280px;">
+
+<!-- New image element -->
+<img id="newImage" src="finalant.png" alt="newImage" style="width: 400px; height: 300px;">
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modal-text"></p>
+    <div class="modal-inner-content">
+    
+    </div>
+  </div>
+</div>
+
+<script>
+
+// Function to set position dynamically
+function setPosition(id, top, left) {
+  var img = document.getElementById(id);
+  if (img) {
+    img.style.top = top + 'px';
+    img.style.left = left + 'px';
+  }
+}
+// New JavaScript for the new section 
+document.getElementById('newImage').addEventListener('click', function() {
+    var newWindow = window.open("", "_blank");
+    newWindow.document.write(`
+    <style>
+            body {
+                background-color: #f35194;
+                font-size: 23px;
+                color: #94f351;
+                font-weight: 750;
+                cursor: url('anntspray.png'), auto;
+    
+            }
+        </style>
+      
+        <h1>Weeks 4 - 6</h1>
+        
+        <p>Here are some cool things I have stumbled across over the past few weeks. These are all artists that work in creative coding. These works haven’t necessarily impacted the visual style of my website but rather inspired the way that I understand what interactive media can become.</p>
+        <p>Zach Lieberman works with experimental drawing and animation. I am a doodler; I find myself sketching and scribbling in my free time and always return to illustration as a method for explaining or expanding my own ideas. Some of Lieberman’s work that I found neat includes <a href="https://lines.chromeexperiments.com/" target="_blank">Land Lines</a> (you draw a line on the screen, and it connects to an identical line of a place on Google Earth) <a href="https://www.eyewriter.org/" target="_blank">Eyewriter</a> (open hardware tool used to help a paralysed graffiti artist to draw by tracking his eye movements) and <a href="https://www.dandad.org/awards/professional/2010/branding/18177/iq-font/" target="_blank">iQ Font</a> (typeface used completely through driving a car).</p>
+        <p><a href="https://github.com/CreativeInquiry/PEmbroider" target="_blank">PEmbroider</a> makes it possible for anyone to create generative embroidery using code. Amazing in regard to making things more accessible for individuals.</p>
+        <p><a href="http://www.art.net/~samia/kinetic/group/kinsub.html" target="_blank">Samia A. Halaby</a> on Kinetic Computing paintings, imagining and creating kinds of collages and very hands on physical looking artworks with glitch, abstraction, and motion. I think I would be interested in utilising glitches and errors to create artwork; it feels very Dada and Avant-Garde to me, and I usually approach most of my creative projects with found materials and spontaneity.</p>
+        <p><a href="https://www.tate.org.uk/art/artworks/metzger-liquid-crystal-environment-t12160" target="_blank">Liquid Crystal Environment</a> is a digital art project created by Gustav Metzger that consists of 5 projectors, the slides contain liquid crystals, the projectors rotate with heating and cooling technology, altering the viscosity of the liquids, creating psychedelic patterns and textures on the screen. I like the marriage of strong texture with flatness of surface.</p>
+        
+
+        <button id="doodling" onclick="window.open('P5/doodling/doodlingHTML.html', '_blank');">Sketching</button>
+        <button id="caterpillar" onclick="window.open('P5/RAINBOWCaterpillar/RAINBOWCATERPILLARHTML.html', '_blank');">Caterpillar</button>
+        <button id="webcam" onclick="window.open('P5/WEBCAMFUN/WEBCAMHTML.html', '_blank');">Webcam</button>
+
+
+    `);
+
+    newWindow.openAntWindow = function() {
+        var antWindow = window.open("", "_blank");
+        antWindow.document.write(`
+        
+        `);
+    };
+});
+// Set positions for each image
+var positions = {
+  'plate': [200, 200],
+  'chicken': [280, 290],
+  'glass': [-150, 600],
+  'peas': [570, 380],
+  'potatoes': [430, 540]
+};
+
+for (let item in positions) {
+  setPosition(item, ...positions[item]);
+}
+
+// Function to show a pop-up when an image is clicked
+function addClickListener(id) {
+  var img = document.getElementById(id);
+  if (img) {
+    img.addEventListener('click', function() {
+      var modal = document.getElementById("myModal");
+      var span = document.getElementsByClassName("close")[0];
+
+      // Customize the modal content based on the clicked image
+var content;
+switch(id) {
+  case 'potatoes':
+    content = '<p>Week One: thinkin bout stuff :</p><p>Sense, nonsense and synaesthesia. I am interested in practice and action. Sense images. Kinetic art? Functional objects like lamps as a form of sculpture?'
+    + '. <a href="https://www.guggenheim.org/artwork/10702">John F. Simon Jr.</a> <a href="http://www.llllllll.de/terrain_02_e.html">The Legible City</a> <a href="https://zkm.de/en/artwork/the-legible-city-0">Sissel Tolaas</a> <a href="https://flash---art.com/2023/06/sissel-tolaas/">Flash Art</a> </p> <img src="coledit.png" style="width: 550px;" />';
+    break;
+  case 'peas':
+    content = '<p>Week Two: research and encounters </p><p>fun/interesting/informative websites... <a href="https://abcdinamo.com/">ABCDINAMO.</a> <a href="https://archive.org/web/">Wayback Machine</a> <a href="https://solar.lowtechmagazine.com/offline-reading/">Lowtechmagazine</a> <a href="https://www.apartamentomagazine.com/">Apartamento Magazine</a> <a href="https://tartmagazine.net/">Tart Magazine</a> <a href="https://canonbase.eu/wiki/Welcome_to_Canon_Base">Canon</a></p>';
+    break;
+  case 'chicken':
+    content = '<p>Week Three: final planning and rumination  </p><img src="firstreal.png" style="width: 250px;" /><img src= "secondreal.png" style="width: 250px;" />';
+    break;
+  case 'glass':
+    content = '<p>planning, sketching and thinking</p><img src="firstideas.png" style="width: 200px;" /><img src="secondideas.png" style="width: 220px;" /><img src="thirdideas.png" style="width: 200px;" /><img src="fourthideas.png" style="width: 200px;" /><img src="randomideas.png" style="width: 200px;" />';
+    break;
+  default:
+    content = '<p>You clicked on ' + id + '</p>';
+}
+document.getElementById("modal-text").innerHTML = content;
+
+
+      // When the user clicks on the button, open the modal
+    modal.style.display = "block";
+    });
+  }
+}
+
+// Add click listeners to each image
+addClickListener('glass');
+addClickListener('peas');
+addClickListener('potatoes');
+addClickListener('chicken');
+
+// Get the modal and close button elements
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</body>
+</html>
