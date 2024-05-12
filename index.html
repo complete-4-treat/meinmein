@@ -120,11 +120,10 @@
 }
 
 #cockroach {
-  #cockroach {
     position: absolute;
-    top: 2000px;
-    left: 2000px;
-    z-index: 100;
+    top: 60px;
+    left: 60px;
+    z-index: 20;
 }
 </style>
 </head>
@@ -275,6 +274,25 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+// Get the image element
+var img = document.getElementById('cockroach');
+
+// Check if the image is loaded
+img.onload = function() {
+    console.log('Image is loaded');
+};
+
+// Check if the image is visible
+var style = window.getComputedStyle(img);
+var display = style.getPropertyValue('display');
+var visibility = style.getPropertyValue('visibility');
+var opacity = style.getPropertyValue('opacity');
+
+console.log('Display: ' + display); // should not be 'none'
+console.log('Visibility: ' + visibility); // should not be 'hidden'
+console.log('Opacity: ' + opacity); // should not be '0'
 </script>
 </body>
 </html>
+
